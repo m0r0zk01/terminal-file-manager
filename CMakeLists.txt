@@ -12,4 +12,4 @@ add_subdirectory(src)
 include_directories(inc)
 
 add_executable(fm main.c)
-target_link_libraries(fm fm_impl terminal columns files config)
+target_link_libraries(fm fm_impl terminal columns files config dl)
