@@ -1,0 +1,8 @@
+build/
+compile_flags.txt
+.vscode
+.idea
+.cache
+.DS_Store
+*.o
+*.so

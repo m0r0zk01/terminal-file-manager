@@ -1,0 +1,7 @@
+# format <extension> [whitespaces] <name>
+# all *.<extension> files will be processed by <name>.so
+
+txt vim
+cpp vim
+c   vim
+gz  gzip
