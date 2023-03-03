@@ -468,8 +468,12 @@ static void Paste(bool cut) {
         fwrite(copyBuffer, 1, cntRead, toPaste);
     }
     fclose(toPaste);
+    if (fseek(State.toCopy, 0, SEEK_SET)) {
+        State.toCopy = NULL;
+    }
     if (cut) {
         remove(State.cutPath);
+        State.toCopy = NULL;
         State.cutPath[0] = '\0';
     }
     *old ='\0';
