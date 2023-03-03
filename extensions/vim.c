@@ -3,7 +3,6 @@
 
 void openFile(const char *path) {
     int pid = fork();
-    int status = 0;
     if (pid < 0) {
         return;
     } else if (pid == 0) {
