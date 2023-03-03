@@ -90,20 +90,23 @@ static void InitState() {
     getcwd(State.curDir, CUR_DIR_SIZE - 1);
     State.curDir[CUR_DIR_SIZE - 1] = '\0';
     size_t len;
+
     #ifdef __APPLE__
     size_t bufsize = CUR_DIR_SIZE - 1;
     int res = _NSGetExecutablePath(State.extensionsePath, &bufsize);
     len = (res == 0 ? strlen(State.extensionsePath) : -1);
-    char *ptr = State.extensionsePath + len;
-    do {
-        *(ptr--) = '\0';
-    } while (*ptr != '/');
     #else
     len = readlink("/proc/self/exe", State.extensionsePath, CUR_DIR_SIZE - 1);
     #endif
+
     if (len < 0) {
         strncpy(State.extensionsePath, State.curDir, CUR_DIR_SIZE - 1);
         len = strnlen(State.extensionsePath, CUR_DIR_SIZE - 1);
+    } else {
+        char *ptr = State.extensionsePath + len;
+        do {
+            *(ptr--) = '\0';
+        } while (*ptr != '/');
     }
     len = strlen(State.extensionsePath);
     strncpy(State.extensionsePath + len, EXTENSIONS_DIRECTORY, CUR_DIR_SIZE - len - 1);
