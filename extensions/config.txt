@@ -1,4 +1,4 @@
-# format <extension> [whitespaces] <name>
+# format: <extension> [whitespaces] <name>
 # all *.<extension> files will be processed by <name>.so
 
 txt vim
