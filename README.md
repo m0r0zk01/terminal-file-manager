@@ -20,7 +20,7 @@ cd ..
 ./fm
 ```
 
-The `fm` executable will appear in root directory. It's important that it's located near [extensions](./extensions) so that dynamically loaded extensions can work(e.g. opening .txt files in vim by pressing Enter)
+The `fm` executable will appear in root directory. It's important that it's located near [extensions](./extensions) so that dynamically loaded extensions can work(e.g. opening .txt files in vim by pressing Enter). Note that you should manually generate corresponding .so files as described in the next section
 
 # Extensions
 
