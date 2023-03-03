@@ -5,4 +5,4 @@ fi
 
 name="$1"
 name="${name::${#name}-2}"
-gcc -c -o "$name.o" "$1" && gcc -shared -o "$name.so" "$name.o" && rm "$name.o" && echo "Built vim.so!"
+gcc -c -o "$name.o" "$1" && gcc -shared -o "$name.so" "$name.o" && rm "$name.o" && echo "Built $name.so!"

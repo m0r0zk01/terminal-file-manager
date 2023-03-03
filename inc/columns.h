@@ -14,7 +14,7 @@ typedef enum Alignment {
 
 typedef struct FileMetaInfo {
     TypeOfField(Stat, st_ino) ino;
-    TypeOfField(DirEnt, d_type) type; 
+    TypeOfField(DirEnt, d_type) type;
 } FileMetaInfo;
 
 #define FOREACH_COLUMN(ADD)                                                           \

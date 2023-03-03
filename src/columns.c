@@ -164,7 +164,7 @@ void EditDateSecToString(File *file, char *buf, size_t size) {
 }
 
 int EditDateSecCompar(const void *f1, const void *f2) {
-    return *(time_t *)(f1) - *(time_t *)(f2);
+    return difftime(((const File *)f1)->EditDateSec, ((const File *)f2)->EditDateSec);
 }
 
 // -----------------------------------------------------------------------------

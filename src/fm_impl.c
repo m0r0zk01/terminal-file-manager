@@ -168,6 +168,9 @@ static bool SkipFile(File *file) {
 }
 
 static void PrintFile(File *file, int line, char *buf, bool highlight) {
+    Action(SET_CURSOR, 3 + line, 1);
+    Action(ROW_BG_COLOR, highlight ? BLKB : "");
+
     bool needFree = false;
     if (buf == NULL) {
         buf = malloc(W);
@@ -270,7 +273,7 @@ static void UpdateCursor()  {
         }
     }
     while (SkipFile(State.files.files + State.fileCursor)) {
-        ++State.fileCursor;
+        State.fileCursor = (State.fileCursor + 1) % State.files.size;
     }
     State.fileIno = State.files.files[State.fileCursor].Meta.ino;
 }
@@ -340,10 +343,10 @@ static char *ConcatName(const char *name, bool endSlash) {
         name = to->Name;
     }
     if (strcmp(name, "..") == 0) {
-        --end;
-        do {
+        end = EnsureNoEndSlash(State.curDir, end);
+        while (end > State.curDir + 1 && *(end - 1) != '/') {
             *(end--) = '\0';
-        } while (*end != '/' && end > State.curDir);
+        }
     } else {
         end = stpncpy(end, name, CUR_DIR_SIZE - (end - State.curDir) - 1);
     }
@@ -395,6 +398,8 @@ static void ProcessFile() {
             }
 
             ((void(*)(const char *))foo)(State.curDir);
+            DisableCursor();
+            EnterAltMode();
 
             dlclose(handle);
         }
@@ -407,14 +412,9 @@ static void ProcessEnter() {
         EnterDir();
         Refresh(true);
     } else {
-        Action(CLEAR_SCREEN);
-        ExitAltMode();
-        EnableCursor();
         char *old = ConcatName(NULL, false);
         ProcessFile();
         *old = '\0';
-        DisableCursor();
-        EnterAltMode();
         Refresh(false);
     }
 }
