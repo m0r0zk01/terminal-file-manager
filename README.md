@@ -6,7 +6,7 @@ It's a simple file manager written in C that runs in terminal and allows you to 
 
 It works best on Linux, but also seems to work on MacOS
 
-<img width="1010" alt="image" src="https://user-images.githubusercontent.com/47718803/222934383-69abd297-0060-424d-b1c5-3e040ca918e9.png">
+<img width="1010" alt="image" src="https://user-images.githubusercontent.com/47718803/222934473-52b1485b-45cf-4796-968f-ddcf266fc6f6.png">
 
 # Installation
 
